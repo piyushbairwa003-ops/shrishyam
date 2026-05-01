@@ -1,0 +1,345 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<meta name="theme-color" content="#0d0800"/>
+<title>श्री SHYAM TRADER�</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;min-height:100%;overflow-x:hidden}
+body{
+  font-family:'Barlow',system-ui,sans-serif;
+  background:#0d0800;
+  color:#fff8ee;
+  -webkit-font-smoothing:antialiased;
+  -webkit-text-size-adjust:100%;
+}
+:root{
+  --g:#f5a623;--g2:#ffd166;--g3:#ffe599;
+  --dim:#c0392b;--dimmer:#8b1a0e;
+  --dark:#0d0800;--dark2:#1a1200;--dark3:#120900;
+  --line:rgba(245,166,35,.18);
+  --muted:#8a7455;--white:#fff8ee;
+}
+.bg{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 70% 45% at 50% 0%, rgba(245,166,35,.12) 0%,transparent 60%),
+    radial-gradient(ellipse 40% 50% at 0% 80%, rgba(192,57,43,.07) 0%,transparent 55%),
+    radial-gradient(ellipse 40% 50% at 100% 20%, rgba(245,166,35,.05) 0%,transparent 55%),
+    #0d0800;
+}
+.scanlines{
+  position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:repeating-linear-gradient(45deg,rgba(245,166,35,.025) 0,rgba(245,166,35,.025) 1px,transparent 1px,transparent 30px);
+  opacity:.5;
+}
+.grid{
+  position:fixed;inset:0;z-index:1;pointer-events:none;
+  background-image:repeating-linear-gradient(45deg,rgba(245,166,35,.03) 0,rgba(245,166,35,.03) 1px,transparent 1px,transparent 44px);
+  background-size:44px 44px;opacity:.35;
+}
+.corner{position:fixed;z-index:2;pointer-events:none;width:40px;height:40px;opacity:.3}
+.c-tl{top:30px;left:0;border-top:1.5px solid var(--g);border-left:1.5px solid var(--g)}
+.c-tr{top:30px;right:0;border-top:1.5px solid var(--g);border-right:1.5px solid var(--g)}
+.c-bl{bottom:0;left:0;border-bottom:1.5px solid var(--g);border-left:1.5px solid var(--g)}
+.c-br{bottom:0;right:0;border-bottom:1.5px solid var(--g);border-right:1.5px solid var(--g)}
+
+/* TICKER */
+.ticker{
+  position:fixed;top:0;left:0;right:0;height:26px;z-index:200;
+  background:#0d0800;border-bottom:1px solid var(--line);
+  display:flex;align-items:center;overflow:hidden;
+}
+.tick-lbl{
+  flex-shrink:0;padding:0 10px;
+  font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;
+  color:var(--g);border-right:1px solid var(--line);
+  height:100%;display:flex;align-items:center;text-transform:uppercase;
+}
+.tick-track{overflow:hidden;flex:1;height:100%;display:flex;align-items:center}
+.tick-inner{
+  display:flex;gap:30px;white-space:nowrap;
+  animation:tick 24s linear infinite;
+  font-family:'Share Tech Mono',monospace;font-size:9px;
+}
+.ti{display:flex;gap:5px;align-items:center}
+.tn{color:rgba(0,200,83,.4);font-size:8.5px}
+.tv{color:#2d5c2d}
+.tu{color:var(--g);font-weight:700}
+.td{color:#ff4444;font-weight:700}
+@keyframes gsh{0%,100%{background-position:0%}50%{background-position:100%}}
+@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+.wrap{
+  position:relative;z-index:10;
+  min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;
+  padding:40px 16px 28px;
+  padding-top:max(40px,calc(26px + env(safe-area-inset-top) + 10px));
+  padding-bottom:max(28px,env(safe-area-inset-bottom));
+}
+.status-bar{
+  display:flex;align-items:center;gap:8px;
+  margin-bottom:14px;animation:up .5s both;
+  font-family:'Share Tech Mono',monospace;
+  font-size:9px;color:rgba(245,166,35,.5);letter-spacing:2px;
+}
+.sb-dot{width:6px;height:6px;border-radius:50%;background:var(--g);box-shadow:0 0 8px var(--g);animation:blink 1.2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+
+.av-outer{
+  position:relative;width:clamp(90px,22vw,112px);height:clamp(90px,22vw,112px);
+  margin-bottom:16px;animation:up .7s .05s cubic-bezier(.22,1,.36,1) both;flex-shrink:0;
+}
+.av-hex{position:absolute;inset:-14px;border:1px solid rgba(245,166,35,.2);border-radius:50%;animation:rot 20s linear infinite}
+.av-hex::before{content:'';position:absolute;inset:6px;border:1px dashed rgba(245,166,35,.12);border-radius:50%;animation:rot-rev 15s linear infinite}
+@keyframes rot{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes rot-rev{from{transform:rotate(0)}to{transform:rotate(-360deg)}}
+.av-glow{position:absolute;inset:-18px;border-radius:50%;background:radial-gradient(circle,rgba(245,166,35,.22) 0%,transparent 65%)}
+.av-ring{position:absolute;inset:-4px;border-radius:50%;border:2.5px solid var(--g);box-shadow:0 0 18px rgba(245,166,35,.55),0 0 36px rgba(245,166,35,.15),inset 0 0 12px rgba(245,166,35,.08)}
+.av-img{width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:center;display:block;box-shadow:0 8px 40px rgba(0,0,0,.9);background:var(--dark2);filter:saturate(1.1) contrast(1.05)}
+.av-badge{position:absolute;bottom:0;right:0;width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#f5a623,#c0392b);border:2px solid var(--dark);display:flex;align-items:center;justify-content:center;font-family:'Share Tech Mono',monospace;font-size:8px;color:#fff;font-weight:700;box-shadow:0 0 10px rgba(245,166,35,.5)}
+
+.ch-id{font-family:'Share Tech Mono',monospace;font-size:clamp(8px,2.2vw,9.5px);color:rgba(245,166,35,.55);letter-spacing:4px;text-transform:uppercase;margin-bottom:5px;text-align:center;animation:up .6s .07s both}
+.ch-name{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(28px,9vw,54px);line-height:1;letter-spacing:1px;text-align:center;animation:up .6s .1s both;margin-bottom:2px;text-transform:uppercase}
+.g-txt{background:linear-gradient(135deg,#f5a623 0%,#ffd166 45%,#f5a623 80%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:200% 100%;animation:gsh 3s ease-in-out infinite;}
+.w-txt{background:linear-gradient(135deg,#e74c3c,#ff7675);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.ch-sub{font-family:'Barlow Condensed',sans-serif;font-size:clamp(9px,2.8vw,11px);font-weight:600;letter-spacing:5px;color:rgba(200,165,90,.5);text-transform:uppercase;margin-bottom:12px;text-align:center;animation:up .6s .12s both}
+
+.mrow{display:flex;align-items:center;gap:12px;margin-bottom:10px;animation:up .6s .14s both;flex-wrap:wrap;justify-content:center}
+.mpill{display:flex;align-items:center;gap:6px;font-family:'Share Tech Mono',monospace;font-size:clamp(10px,3vw,11.5px);color:var(--muted)}
+.mpill strong{color:var(--g2);font-weight:700}
+.dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.dot-g{background:var(--g);box-shadow:0 0 6px var(--g)}
+.dot-p{background:var(--dim);box-shadow:0 0 6px var(--dim);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.2}}
+.msep{width:1px;height:12px;background:rgba(245,166,35,.12)}
+
+.rule{width:min(280px,82vw);margin:0 auto 12px;display:flex;align-items:center;gap:8px;animation:up .6s .16s both}
+.rule-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--dim),transparent)}
+.rule-dia{width:5px;height:5px;background:var(--g);transform:rotate(45deg);box-shadow:0 0 6px var(--g);flex-shrink:0}
+
+.disc-box{width:min(320px,92vw);background:rgba(245,166,35,.05);border:1px solid rgba(0,200,83,.15);border-left:2px solid var(--g);border-radius:2px;padding:9px 13px;margin-bottom:12px;display:flex;align-items:flex-start;gap:8px;animation:up .6s .18s both}
+.d-pre{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--g);flex-shrink:0;margin-top:2px;letter-spacing:1px}
+.d-txt{font-family:'Barlow',sans-serif;font-size:clamp(10.5px,3vw,12px);color:rgba(210,180,120,.8);line-height:1.6;font-weight:500}
+.d-txt strong{color:var(--g2)}
+
+.mkts{display:flex;gap:5px;flex-wrap:wrap;justify-content:center;margin-bottom:12px;animation:up .6s .2s both;width:min(340px,92vw)}
+.mkt{padding:4px 11px;border-radius:2px;font-family:'Barlow Condensed',sans-serif;font-size:clamp(9px,2.8vw,11px);font-weight:700;letter-spacing:1.5px;background:rgba(192,57,43,.07);border:1px solid rgba(0,200,83,.18);color:var(--dim);text-transform:uppercase}
+
+.stats{display:flex;width:min(320px,92vw);border:1px solid rgba(245,166,35,.16);border-radius:6px;overflow:hidden;margin-bottom:18px;background:rgba(26,18,0,.6);animation:up .6s .22s both}
+.stat{flex:1;padding:12px 6px;text-align:center;border-right:1px solid rgba(245,166,35,.08)}
+.stat:last-child{border-right:none}
+.sn{font-family:'Share Tech Mono',monospace;font-size:clamp(16px,5vw,21px);background:linear-gradient(135deg,var(--g),var(--g2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:4px}
+.sl{font-family:'Barlow Condensed',sans-serif;font-size:clamp(7px,2vw,8.5px);font-weight:700;letter-spacing:2px;color:rgba(100,75,30,.85);text-transform:uppercase}
+
+/* ===== SUPER BUTTON ===== */
+.cta-wrap{
+  width:min(400px,92vw);
+  margin-bottom:16px;
+  animation:up .6s .27s both;
+  position:relative;
+}
+/* outer glow rings */
+.cta-ring1,.cta-ring2{
+  position:absolute;inset:0;border-radius:6px;pointer-events:none;
+  border:2px solid rgba(245,166,35,.4);
+  animation:ring-grow1 2s ease-out infinite;
+}
+.cta-ring2{
+  animation:ring-grow2 2s ease-out infinite;
+  animation-delay:.6s;
+}
+@keyframes ring-grow1{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.08);opacity:0}}
+@keyframes ring-grow2{
+  0%{transform:scale(1);opacity:.4}
+  100%{transform:scale(1.12);opacity:0}
+}
+.cta{
+  display:flex;align-items:center;justify-content:center;gap:11px;
+  width:100%;padding:17px 20px;
+  /* VIBRANT GRADIENT FILL */
+  background:linear-gradient(135deg,#8b1a0e 0%,#c0392b 30%,#e74c3c 55%,#c0392b 75%,#8b1a0e 100%);
+  background-size:250% 100%;
+  border:none;
+  border-radius:6px;
+  color:#fff;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:clamp(14px,4.5vw,17px);font-weight:800;letter-spacing:3px;
+  text-decoration:none;text-transform:uppercase;
+  white-space:nowrap;
+  position:relative;overflow:hidden;cursor:pointer;
+  /* grow animation */
+  animation:btn-grow 1.8s ease-in-out infinite, gslide 2.2s linear infinite;
+  box-shadow:
+    0 0 0 0 rgba(192,57,43,.5),0 6px 24px rgba(192,57,43,.4),0 12px 40px rgba(192,57,43,.2),inset 0 1px 0 rgba(255,255,255,.2);
+  -webkit-tap-highlight-color:transparent;
+}
+/* shimmer sweep */
+.cta::before{
+  content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,200,100,.22),transparent);
+  animation:shim 2s ease-in-out infinite;
+}
+/* bottom glow line */
+.cta::after{
+  content:'';position:absolute;bottom:0;left:10%;right:10%;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);
+}
+/* GROW keyframe */
+@keyframes btn-grow{
+  0%{transform:scale(1);box-shadow:0 0 0 0 rgba(192,57,43,.5),0 6px 24px rgba(192,57,43,.4),0 12px 40px rgba(192,57,43,.2),inset 0 1px 0 rgba(255,255,255,.2)}
+40%{transform:scale(1.045);box-shadow:0 0 0 8px rgba(192,57,43,0),0 10px 36px rgba(192,57,43,.65),0 20px 60px rgba(192,57,43,.3),inset 0 1px 0 rgba(255,255,255,.2)}
+100%{transform:scale(1);box-shadow:0 0 0 0 rgba(192,57,43,.5),0 6px 24px rgba(192,57,43,.4),0 12px 40px rgba(192,57,43,.2),inset 0 1px 0 rgba(255,255,255,.2)}
+}
+@keyframes gslide{0%{background-position:0%}100%{background-position:250%}}
+@keyframes shim{0%{left:-100%}100%{left:160%}}
+
+.tg-ico{width:20px;height:20px;fill:#fff;flex-shrink:0}
+
+.edu-box{width:min(320px,92vw);background:rgba(0,200,83,.03);border:1px solid rgba(245,166,35,.12);border-radius:2px;padding:9px 12px;margin-bottom:10px;display:flex;align-items:flex-start;gap:9px;animation:up .6s .3s both}
+.e-pre{font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(245,166,35,.5);flex-shrink:0;margin-top:2px;letter-spacing:1px}
+.e-txt{font-family:'Barlow',sans-serif;font-size:clamp(10px,3vw,11.5px);color:rgba(210,175,100,.75);line-height:1.6;font-weight:500}
+.e-txt strong{color:var(--g2)}
+
+.badges{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:10px;animation:up .6s .33s both}
+.badge{font-family:'Share Tech Mono',monospace;font-size:clamp(8.5px,2.5vw,10px);color:rgba(90,65,20,.9);display:flex;align-items:center;gap:4px}
+.bc{color:var(--g)}
+
+.footer{display:flex;align-items:center;gap:6px;font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(120,90,30,.8);animation:up .6s .36s both}
+.credit{font-family:'Share Tech Mono',monospace;font-size:13px;font-weight:600;color:rgba(160,120,50,.85);animation:up .6s .38s both;text-align:center;margin-top:6px}
+.credit a{color:rgba(245,166,35,.75);text-decoration:none;font-weight:700;font-size:14px;}
+.credit a:hover{color:var(--g2)}
+@keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:360px){
+  .ch-name{font-size:clamp(24px,10vw,34px)}
+  .mkt{padding:3px 8px;font-size:9px}
+  .cta{padding:14px 14px;font-size:13px;letter-spacing:2px}
+}
+@media(max-height:640px) and (max-width:480px){.disc-box{display:none}.av-outer{width:84px;height:84px;margin-bottom:10px}}
+@media(max-height:560px){.ch-id,.edu-box,.badges{display:none}}
+@media(max-height:490px){.mkts,.ch-sub{display:none}}
+</style>
+</head>
+<body>
+<div class="bg" aria-hidden="true"></div>
+<div class="grid" aria-hidden="true"></div>
+<div class="scanlines" aria-hidden="true"></div>
+<div class="corner c-tl" aria-hidden="true"></div>
+<div class="corner c-tr" aria-hidden="true"></div>
+<div class="corner c-bl" aria-hidden="true"></div>
+<div class="corner c-br" aria-hidden="true"></div>
+
+<div class="ticker" aria-hidden="true">
+  <div class="tick-lbl">LIVE</div>
+  <div class="tick-track">
+    <div class="tick-inner">
+      <span class="ti"><span class="tn">NIFTY</span><span class="tv">22,350</span><span class="tu">+0.45%</span></span>
+      <span class="ti"><span class="tn">SENSEX</span><span class="tv">73,620</span><span class="tu">+0.38%</span></span>
+      <span class="ti"><span class="tn">BANKNIFTY</span><span class="tv">48,240</span><span class="td">-0.22%</span></span>
+      <span class="ti"><span class="tn">NIFTY CE</span><span class="tv">180</span><span class="tu">+2.5%</span></span>
+      <span class="ti"><span class="tn">NIFTY PE</span><span class="tv">95</span><span class="td">-1.8%</span></span>
+      <span class="ti"><span class="tn">BTC</span><span class="tv">67,420</span><span class="tu">+1.2%</span></span>
+      <span class="ti"><span class="tn">GOLD</span><span class="tv">72,400</span><span class="tu">+0.18%</span></span>
+      <span class="ti"><span class="tn">NIFTY</span><span class="tv">22,350</span><span class="tu">+0.45%</span></span>
+      <span class="ti"><span class="tn">SENSEX</span><span class="tv">73,620</span><span class="tu">+0.38%</span></span>
+      <span class="ti"><span class="tn">BANKNIFTY</span><span class="tv">48,240</span><span class="td">-0.22%</span></span>
+      <span class="ti"><span class="tn">NIFTY CE</span><span class="tv">180</span><span class="tu">+2.5%</span></span>
+      <span class="ti"><span class="tn">NIFTY PE</span><span class="tv">95</span><span class="td">-1.8%</span></span>
+      <span class="ti"><span class="tn">BTC</span><span class="tv">67,420</span><span class="tu">+1.2%</span></span>
+      <span class="ti"><span class="tn">GOLD</span><span class="tv">72,400</span><span class="tu">+0.18%</span></span>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+  <div class="status-bar">
+    <span class="sb-dot"></span>
+    <span>SYS:ONLINE</span>
+    <span style="opacity:.3">|</span>
+    <span>EDU:ACTIVE</span>
+    <span style="opacity:.3">|</span>
+    <span>CH:VERIFIED</span>
+  </div>
+
+  <div class="av-outer">
+    <div class="av-glow"></div>
+    <div class="av-hex"></div>
+    <div class="av-ring"></div>
+<img src = "https://fantasticczone.site/wp-content/uploads/2026/05/shrrri.jpg"  alt="CE &amp; PE EduEmpireX" class="av-img" loading="eager"/>
+  </div>
+
+  <p class="ch-id">// TRADING &amp; SHARE MARKET //</p>
+  <h1 class="ch-name"><span class="g-txt">श्री SHYAM TRADER�
+</span><br/><span class="w-txt">SHYAM TRADER�</span></h1>
+  <p class="ch-sub">Official Education Channel</p>
+
+  <div class="mrow">
+    <div class="mpill"><span class="dot dot-g"></span><strong>17,938</strong>&nbsp;SUBSCRIBERS</div>
+    <div class="msep"></div>
+    <div class="mpill"><span class="dot dot-p"></span><strong>EDU</strong>&nbsp;PURPOSE</div>
+  </div>
+
+  <div class="rule"><div class="rule-line"></div><div class="rule-dia"></div><div class="rule-line"></div></div>
+
+  <div class="disc-box">
+    <div class="d-pre">DISC:</div>
+    <div class="d-txt">ALL POSTS ARE only for <strong>EDUCATIONAL PURPOSES</strong> only. Not financial advice.</div>
+  </div>
+
+  <div class="mkts">
+   
+    <span class="mkt">Index</span>
+    <span class="mkt">F&amp;O</span>
+    <span class="mkt">Education</span>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="sn">17K+</div><div class="sl">Subscribers</div></div>
+    <div class="stat"><div class="sn">SHYAM TRADER</div><div class="sl">Speciality</div></div>
+    <div class="stat"><div class="sn">FREE</div><div class="sl">To Join</div></div>
+  </div>
+
+  <div class="cta-wrap">
+    <div class="cta-ring1"></div>
+    <div class="cta-ring2"></div>
+    <a class="cta" href="https://telegram.me/+wymOALu788o2Mjc9" target="_blank" rel="noopener noreferrer">
+      <svg class="tg-ico" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+      </svg>
+      JOIN CHANNEL — FREE
+    </a>
+  </div>
+
+  <div class="edu-box">
+    <div class="e-pre">INFO:</div>
+    <div class="e-txt">Learn <strong>SHYAM TRADER� Options</strong> trading strategies with expert analysis and real market education.</div>
+  </div>
+
+  <div class="badges">
+    
+    <span class="badge"><span class="bc">■</span> Index Tips</span>
+    <span class="badge"><span class="bc">■</span> F&amp;O Edu</span>
+  </div>
+
+  <div class="footer">
+    <span style="color:var(--g);opacity:.4">◆</span>
+    <span>श्री SHYAM TRADER�
+</span>
+    <span style="color:var(--g);opacity:.4">◆</span>
+    <span>EST. 2024</span>
+    <span style="color:var(--g);opacity:.4">◆</span>
+  </div>
+  <p class="credit">Ads by <a href="https://t.me/+TRlJl628l-FkMWE9" target="_blank" rel="noopener">@Nexgroww_agency</a></p>
+</main>
+ 
+</body>
+</html>
